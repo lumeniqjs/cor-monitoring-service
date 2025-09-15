@@ -11,8 +11,8 @@ import logging
 import smtplib
 import requests
 from datetime import datetime, timedelta
-from email.mime.text import MimeText
-from email.mime.multipart import MimeMultipart
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 # Configure logging
 logging.basicConfig(
@@ -84,7 +84,7 @@ class MonitoringService:
             msg['To'] = self.alert_email_to
             msg['Subject'] = f"{self.alert_subject_prefix} {subject}"
             
-            msg.attach(MimeText(message, 'plain'))
+            msg.attach(MIMEText(message, 'plain'))
             
             server = smtplib.SMTP(self.smtp_server, self.smtp_port)
             if self.smtp_use_tls:
